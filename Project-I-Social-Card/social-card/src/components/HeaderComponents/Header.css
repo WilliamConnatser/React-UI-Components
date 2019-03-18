@@ -1,1 +1,15 @@
 /* All styles for your header Components live here */
+
+.header {
+    display: flex;
+    font-size: .85rem;
+}
+
+.header-title {
+    font-weight: 600;
+}
+
+.header-content {
+    margin-left: 10px;
+    color: grey;
+}
