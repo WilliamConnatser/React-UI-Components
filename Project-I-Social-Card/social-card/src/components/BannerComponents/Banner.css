@@ -1,0 +1,33 @@
+.banner {
+    border-radius: 5px;
+    border: 1px grey solid;
+    width: 97%;
+}
+
+.banner-image-container {
+    background: black;
+    text-align: center;
+}
+
+.banner-image {
+    height: 250px;
+}
+
+.banner-info {
+    padding: 12px;
+    font-size: .9rem;
+}
+
+.banner-title {
+    font-weight: 800;
+}
+
+.banner-description {
+    margin: 5px 0;
+    line-height: 17px;
+}
+
+.banner-link {
+    color: grey;
+    text-decoration: none;
+}

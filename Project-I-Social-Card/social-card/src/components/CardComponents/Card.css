@@ -1,1 +1,21 @@
 /* All styles for your Card Components live here */
+
+.card {
+    display: flex;
+    width: 590px;
+}
+
+.card-thumbnail {
+    margin: 9px 5px;
+    text-align: center;
+}
+
+.card-content {
+    padding-top: 15px;
+}
+
+.card-content-text {
+    margin: 7px 10px 15px 0;
+    font-size: .9rem;
+    line-height: 18px;
+}
