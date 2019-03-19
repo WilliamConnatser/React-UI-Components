@@ -11,8 +11,12 @@ const App = () => {
   const [buttonSequenceState, setButtonSequenceState ] = useState([]);
 
   //Button Click Handler
-  const buttonClickHandler = function(value) {
+  const buttonClickHandler = async function(value) {
     console.log("clicked", value, typeof value)
+
+    if(buttonSequenceState.indexOf('=') > -1 && value !== 'clear') {
+      return null;
+    }
 
     if(typeof value !== 'string') {
       if(typeof buttonSequenceState[buttonSequenceState.length-1] === 'string') {
@@ -33,7 +37,6 @@ const App = () => {
         const newSequence = [...buttonSequenceState];
         const lastIndex = newSequence.length-1;
         newSequence[lastIndex] = Number(newSequence[lastIndex].toString() + value);
-        console.log(newSequence)
 
         setButtonSequenceState([
           ...newSequence     
@@ -42,13 +45,20 @@ const App = () => {
       }
 
     } else {
-      console.log(value)
+
       if(value === 'clear') {
 
         setButtonSequenceState([]);
 
       } else if (value==="=") {
-        //Evaluate math...
+        //Evaluate math... :(
+          const solution = await doMath([...buttonSequenceState, value])
+
+          setButtonSequenceState([
+            ...buttonSequenceState,
+            '=',
+            solution
+          ]);
 
       } else {
 
@@ -59,13 +69,6 @@ const App = () => {
 
       }
     }
-    /*
-    setButtonSequenceState([
-      ...buttonSequenceState,
-      value
-    ]);
-    setDisplayState(buttonSequenceState.join(''));
-    */
   }
 
   //Generate # Buttons
@@ -130,3 +133,41 @@ const App = () => {
 };
 
 export default App;
+
+
+function doMath(buttonSequence) {
+  //Order of Operations: MDAS
+  if(buttonSequence.indexOf('x') > -1) {
+
+    const index = buttonSequence.indexOf('x');
+    const product = buttonSequence[index-1] * buttonSequence[index+1];
+    buttonSequence.splice(index-1, 3, product);
+    console.log("flawwww", buttonSequence)
+    return doMath(buttonSequence);
+
+  } else if (buttonSequence.indexOf('/') > -1) {
+
+    const index = buttonSequence.indexOf('/');
+    const product = buttonSequence[index-1] / buttonSequence[index+1];
+    buttonSequence.splice(index-1, 3, product);
+    return doMath(buttonSequence);
+
+  } else if (buttonSequence.indexOf('+') > -1) {
+
+    const index = buttonSequence.indexOf('+');
+    const sum = buttonSequence[index-1] + buttonSequence[index+1];
+    buttonSequence.splice(index-1, 3, sum);
+    return doMath(buttonSequence);
+
+  } else if (buttonSequence.indexOf('-') > -1) {
+
+    const index = buttonSequence.indexOf('-');
+    const difference = buttonSequence[index-1] - buttonSequence[index+1];
+    buttonSequence.splice(index-1, 3, difference);
+    return doMath(buttonSequence);
+
+  } else {
+    return buttonSequence[0];
+  }
+
+}
