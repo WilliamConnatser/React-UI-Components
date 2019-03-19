@@ -7,8 +7,10 @@ export default function(props) {
             className={ props.className + " NumberButton" }
             onClick={
                 (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
                     event.nativeEvent.stopImmediatePropagation();
-                    props.buttonClickHandler()
+                    props.buttonClickHandler(props.number)
                 }
             }>
             { props.number }

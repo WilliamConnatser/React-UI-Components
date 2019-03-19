@@ -9,7 +9,6 @@ const App = () => {
 
   //Initialize State
   const [buttonSequenceState, setButtonSequenceState ] = useState([]);
-  const [displayState, setDisplayState ] = useState('');
 
   //Button Click Handler
   const buttonClickHandler = function(value) {
@@ -22,33 +21,43 @@ const App = () => {
           ...buttonSequenceState,
           value
         ]);
-        setDisplayState(buttonSequenceState.join(' '));
 
       } else if (buttonSequenceState.length === 0) {
 
         setButtonSequenceState([
           value         
         ]);
-        setDisplayState(value);
         
       } else {
 
         const newSequence = [...buttonSequenceState];
         const lastIndex = newSequence.length-1;
         newSequence[lastIndex] = Number(newSequence[lastIndex].toString() + value);
+        console.log(newSequence)
 
         setButtonSequenceState([
-          ...newSequence          
+          ...newSequence     
         ]);
-        setDisplayState(buttonSequenceState.join(' '));
+        
       }
-    } else {
 
-      setButtonSequenceState([
-        ...buttonSequenceState,
-        value
-      ]);
-      setDisplayState(buttonSequenceState.join(' '));
+    } else {
+      console.log(value)
+      if(value === 'clear') {
+
+        setButtonSequenceState([]);
+
+      } else if (value==="=") {
+        //Evaluate math...
+
+      } else {
+
+        setButtonSequenceState([
+          ...buttonSequenceState,
+          value
+        ]);
+
+      }
     }
     /*
     setButtonSequenceState([
@@ -63,14 +72,15 @@ const App = () => {
   const numberButtons = Array.apply(null, Array(10)).map((num, index) => {
 
     //Style # Buttons
-    if(index!==0) var buttonClass = "button button-normal";
-    else var buttonClass = "button button-wide"
+    let buttonClass;
+    if(index!==0) buttonClass = "button button-normal";
+    else buttonClass = "button button-wide"
 
     return <NumberButton
       key= { index }
       className= { buttonClass }
       number= { index }
-      buttonClickHandler={buttonClickHandler.bind(this, index)}/>
+      buttonClickHandler={ buttonClickHandler.bind(this) }/>
   })
   //Order # buttons
   .reverse();
@@ -80,14 +90,14 @@ const App = () => {
 
     <div className="App">
       <div className="calculator-container">
-        <CalculatorDisplay displayString={displayState} />
+        <CalculatorDisplay displayString={ buttonSequenceState.join('&nbsp;') } />
         <div className="input-container">
-        
+
           <div className="input-container-left">
             <ActionButton
               className="button button-wide"
               operation="clear"
-              buttonClickHandler={buttonClickHandler.bind(this, "clear")}/>              
+              buttonClickHandler={ buttonClickHandler.bind(this, "clear") }/>              
             { numberButtons }
           </div>
 
@@ -95,23 +105,23 @@ const App = () => {
             <ActionButton
               className="button button-wide"
               operation="/"
-              buttonClickHandler={buttonClickHandler.bind(this, "/")}/>
+              buttonClickHandler={ buttonClickHandler.bind(this, "/") }/>
             <ActionButton
               className="button button-wide"
               operation="x"
-              buttonClickHandler={buttonClickHandler.bind(this, "x")}/>
+              buttonClickHandler={ buttonClickHandler.bind(this, "x") }/>
             <ActionButton
               className="button button-wide"
               operation="-"
-              buttonClickHandler={buttonClickHandler.bind(this, "-")}/>
+              buttonClickHandler={ buttonClickHandler.bind(this, "-") }/>
             <ActionButton
               className="button button-wide"
               operation="+"
-              buttonClickHandler={buttonClickHandler.bind(this, "+")}/>
+              buttonClickHandler={ buttonClickHandler.bind(this, "+") }/>
             <ActionButton
               className="button button-wide"
               operation="="
-              buttonClickHandler={buttonClickHandler.bind(this, "=")}/>
+              buttonClickHandler={ buttonClickHandler.bind(this, "=") }/>
           </div>
         </div>
       </div>
