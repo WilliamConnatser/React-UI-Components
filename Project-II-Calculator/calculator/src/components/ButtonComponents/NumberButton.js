@@ -3,8 +3,15 @@ import './Button.css';
 
 export default function(props) {
     return (
-        <div className={ props.className + " NumberButton" }>
+        <button
+            className={ props.className + " NumberButton" }
+            onClick={
+                (event) => {
+                    event.nativeEvent.stopImmediatePropagation();
+                    props.buttonClickHandler()
+                }
+            }>
             { props.number }
-        </div>
+        </button>
     )
 }

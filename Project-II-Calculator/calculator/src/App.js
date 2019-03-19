@@ -7,6 +7,59 @@ import ActionButton from './components/ButtonComponents/ActionButton';
 
 const App = () => {
 
+  //Initialize State
+  const [buttonSequenceState, setButtonSequenceState ] = useState([]);
+  const [displayState, setDisplayState ] = useState('');
+
+  //Button Click Handler
+  const buttonClickHandler = function(value) {
+    console.log("clicked", value, typeof value)
+
+    if(typeof value !== 'string') {
+      if(typeof buttonSequenceState[buttonSequenceState.length-1] === 'string') {
+
+        setButtonSequenceState([
+          ...buttonSequenceState,
+          value
+        ]);
+        setDisplayState(buttonSequenceState.join(' '));
+
+      } else if (buttonSequenceState.length === 0) {
+
+        setButtonSequenceState([
+          value         
+        ]);
+        setDisplayState(value);
+        
+      } else {
+
+        const newSequence = [...buttonSequenceState];
+        const lastIndex = newSequence.length-1;
+        newSequence[lastIndex] = Number(newSequence[lastIndex].toString() + value);
+
+        setButtonSequenceState([
+          ...newSequence          
+        ]);
+        setDisplayState(buttonSequenceState.join(' '));
+      }
+    } else {
+
+      setButtonSequenceState([
+        ...buttonSequenceState,
+        value
+      ]);
+      setDisplayState(buttonSequenceState.join(' '));
+    }
+    /*
+    setButtonSequenceState([
+      ...buttonSequenceState,
+      value
+    ]);
+    setDisplayState(buttonSequenceState.join(''));
+    */
+  }
+
+  //Generate # Buttons
   const numberButtons = Array.apply(null, Array(10)).map((num, index) => {
 
     //Style # Buttons
@@ -16,28 +69,11 @@ const App = () => {
     return <NumberButton
       key= { index }
       className= { buttonClass }
-      number= { index } />
-  }).reverse();
-
-  //Initialize State
-  const [buttonSequenceState, setButtonSequenceState ] = useState([]);
-  const [displayState, setDisplayState ] = useState('');
-
-  //Button Click Handler
-  const buttonPressHandler = value => {
-
-    setButtonSequenceState([
-      ...buttonSequenceState,
-      event
-    ]);
-
-    setDisplayState(buttonSequenceState.join(''));
-
-  }
-
-
-    
-
+      number= { index }
+      buttonClickHandler={buttonClickHandler.bind(this, index)}/>
+  })
+  //Order # buttons
+  .reverse();
 
 
   return (
@@ -46,16 +82,36 @@ const App = () => {
       <div className="calculator-container">
         <CalculatorDisplay displayString={displayState} />
         <div className="input-container">
+        
           <div className="input-container-left">
-            <ActionButton className="button button-wide" operation="clear" />
+            <ActionButton
+              className="button button-wide"
+              operation="clear"
+              buttonClickHandler={buttonClickHandler.bind(this, "clear")}/>              
             { numberButtons }
           </div>
+
           <div className="input-container-right">
-            <ActionButton className="button button-wide" operation="/" />
-            <ActionButton className="button button-wide" operation="x" />
-            <ActionButton className="button button-wide" operation="-" />
-            <ActionButton className="button button-wide" operation="+" />
-            <ActionButton className="button button-wide" operation="=" />
+            <ActionButton
+              className="button button-wide"
+              operation="/"
+              buttonClickHandler={buttonClickHandler.bind(this, "/")}/>
+            <ActionButton
+              className="button button-wide"
+              operation="x"
+              buttonClickHandler={buttonClickHandler.bind(this, "x")}/>
+            <ActionButton
+              className="button button-wide"
+              operation="-"
+              buttonClickHandler={buttonClickHandler.bind(this, "-")}/>
+            <ActionButton
+              className="button button-wide"
+              operation="+"
+              buttonClickHandler={buttonClickHandler.bind(this, "+")}/>
+            <ActionButton
+              className="button button-wide"
+              operation="="
+              buttonClickHandler={buttonClickHandler.bind(this, "=")}/>
           </div>
         </div>
       </div>

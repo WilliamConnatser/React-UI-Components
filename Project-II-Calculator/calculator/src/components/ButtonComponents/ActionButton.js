@@ -3,7 +3,14 @@ import './Button.css';
 
 export default function(props) {
     return (
-        <button className={ props.className + " ActionButton" }>
+        <button
+            className={ props.className + " ActionButton" }
+            onClick={
+                (event) => {
+                    event.nativeEvent.stopImmediatePropagation();
+                    props.buttonClickHandler()
+                }
+            }>
             { props.operation }
         </button>
     )
