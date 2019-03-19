@@ -3,8 +3,8 @@ import './Button.css';
 
 export default function(props) {
     return (
-        <div className={ props.className + " ActionButton" }>
+        <button className={ props.className + " ActionButton" }>
             { props.operation }
-        </div>
+        </button>
     )
 }

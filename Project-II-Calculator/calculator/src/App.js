@@ -9,7 +9,7 @@ const App = () => {
 
   const numberButtons = Array.apply(null, Array(10)).map((num, index) => {
 
-    //Style button
+    //Style # Buttons
     if(index!==0) var buttonClass = "button button-normal";
     else var buttonClass = "button button-wide"
 
@@ -19,11 +19,32 @@ const App = () => {
       number= { index } />
   }).reverse();
 
+  //Initialize State
+  const [buttonSequenceState, setButtonSequenceState ] = useState([]);
+  const [displayState, setDisplayState ] = useState('');
+
+  //Button Click Handler
+  const buttonPressHandler = value => {
+
+    setButtonSequenceState([
+      ...buttonSequenceState,
+      event
+    ]);
+
+    setDisplayState(buttonSequenceState.join(''));
+
+  }
+
+
+    
+
+
+
   return (
 
     <div className="App">
       <div className="calculator-container">
-        <CalculatorDisplay displayString="1 x 5 = 5" />
+        <CalculatorDisplay displayString={displayState} />
         <div className="input-container">
           <div className="input-container-left">
             <ActionButton className="button button-wide" operation="clear" />
