@@ -5,14 +5,7 @@ export default function(props) {
     return (
         <button
             className={ props.className + " NumberButton" }
-            onClick={
-                (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    event.nativeEvent.stopImmediatePropagation();
-                    props.buttonClickHandler(props.number)
-                }
-            }>
+            onClick={ props.buttonClickHandler }>
             { props.number }
         </button>
     )

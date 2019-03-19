@@ -83,7 +83,7 @@ const App = () => {
       key= { index }
       className= { buttonClass }
       number= { index }
-      buttonClickHandler={ buttonClickHandler.bind(this) }/>
+      buttonClickHandler={ buttonClickHandler.bind(this, index) }/>
   })
   //Order # buttons
   .reverse();

@@ -5,14 +5,7 @@ export default function(props) {
     return (
         <button
             className={ props.className + " ActionButton" }
-            onClick={
-                (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    event.nativeEvent.stopImmediatePropagation();
-                    props.buttonClickHandler()
-                }
-            }>
+            onClick={props.buttonClickHandler}>
             { props.operation }
         </button>
     )
