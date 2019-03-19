@@ -8,7 +8,7 @@ export default () => {
     return (
         <div className="card">
             <ImageThumbnail />            
-            <CardContent />            
+            <CardContent />
         </div>
     )
 }

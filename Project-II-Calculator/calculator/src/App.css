@@ -1,0 +1,7 @@
+.App {
+    background: yellow;
+}
+
+.App .calculator-container {
+    max-width: 555px;
+}

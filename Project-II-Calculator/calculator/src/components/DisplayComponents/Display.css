@@ -1,0 +1,11 @@
+.Display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background: black;
+}
+
+.Display .string {
+    color: white;
+    font-size: 3rem;
+}
