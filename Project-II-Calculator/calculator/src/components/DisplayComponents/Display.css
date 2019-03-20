@@ -1,9 +1,12 @@
 .Display {
     display: flex;
     justify-content: flex-end;
+    box-sizing: border-box;
+    
     align-items: center;
     background: black;
-    height: 16.67vh;
+    height: 16.6vh;
+    padding: 10px;
 }
 
 .Display .string {

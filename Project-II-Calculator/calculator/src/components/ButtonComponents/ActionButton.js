@@ -5,7 +5,7 @@ export default function(props) {
     return (
         <button
             className={ props.className + " ActionButton" }
-            onClick={props.buttonClickHandler}>
+            onClick={ props.buttonClickHandler }>
             { props.operation }
         </button>
     )

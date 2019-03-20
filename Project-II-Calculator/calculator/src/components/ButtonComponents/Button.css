@@ -1,9 +1,11 @@
 .button {
-    height: 16.67vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
     border: 1px solid grey;
+    box-sizing: border-box;
+    height: 16.6vh;
 }
 
 .button-wide {
@@ -11,7 +13,7 @@
 }
 
 .button-normal {
-    width: 32.9%
+    width: 33.33%
 }
 
 .NumberButton {
@@ -24,4 +26,8 @@
     font-weight: 600;
     color: white;
     background: darkred;
+}
+
+.clear {
+
 }
