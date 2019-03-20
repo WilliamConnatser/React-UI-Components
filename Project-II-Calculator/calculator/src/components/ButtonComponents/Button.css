@@ -1,0 +1,33 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid grey;
+    box-sizing: border-box;
+    height: 16.6vh;
+}
+
+.button-wide {
+    width: 100%;
+}
+
+.button-normal {
+    width: 33.33%
+}
+
+.NumberButton {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.ActionButton {
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    background: darkred;
+}
+
+.clear {
+
+}

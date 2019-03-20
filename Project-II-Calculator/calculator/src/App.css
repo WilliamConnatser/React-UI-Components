@@ -1,0 +1,20 @@
+.App .calculator-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.input-container {
+    display: flex;
+    margin: 0 auto;
+}
+
+.calculator-container .input-container-left {
+    width: 75%;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
+.calculator-container .input-container-right {
+    width: 25%;
+}
