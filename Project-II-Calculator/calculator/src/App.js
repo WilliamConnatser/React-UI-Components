@@ -136,38 +136,68 @@ export default App;
 
 
 function doMath(buttonSequence) {
-  //Order of Operations: MDAS
-  if(buttonSequence.indexOf('x') > -1) {
+  //Order of Operations: MD left to right, then AS left to right
+  if(buttonSequence.includes('x') && buttonSequence.includes('/')) {
 
-    const index = buttonSequence.indexOf('x');
-    const product = buttonSequence[index-1] * buttonSequence[index+1];
-    buttonSequence.splice(index-1, 3, product);
-    console.log("flawwww", buttonSequence)
-    return doMath(buttonSequence);
+    if(buttonSequence.indexOf('x') < buttonSequence.indexOf('/')) {
 
-  } else if (buttonSequence.indexOf('/') > -1) {
+      return doMath(evaluateSegment(buttonSequence, 'x'));
+  
+    } else {
+  
+      return doMath(evaluateSegment(buttonSequence, '/'));
+  
+    }
 
-    const index = buttonSequence.indexOf('/');
-    const product = buttonSequence[index-1] / buttonSequence[index+1];
-    buttonSequence.splice(index-1, 3, product);
-    return doMath(buttonSequence);
+  } else if (buttonSequence.includes('x')) {
 
-  } else if (buttonSequence.indexOf('+') > -1) {
+    return doMath(evaluateSegment(buttonSequence, 'x'));
 
-    const index = buttonSequence.indexOf('+');
-    const sum = buttonSequence[index-1] + buttonSequence[index+1];
-    buttonSequence.splice(index-1, 3, sum);
-    return doMath(buttonSequence);
+  } else if (buttonSequence.includes('/')) {
 
-  } else if (buttonSequence.indexOf('-') > -1) {
+    return doMath(evaluateSegment(buttonSequence, '/'));
 
-    const index = buttonSequence.indexOf('-');
-    const difference = buttonSequence[index-1] - buttonSequence[index+1];
-    buttonSequence.splice(index-1, 3, difference);
-    return doMath(buttonSequence);
+  } else if(buttonSequence.includes('+') && buttonSequence.includes('-')) {
+
+    if (buttonSequence.indexOf('+') < buttonSequence.indexOf('-')) {
+
+      return doMath(evaluateSegment(buttonSequence, '+'));
+  
+    } else {
+  
+      return doMath(evaluateSegment(buttonSequence, '-'));
+  
+    }
+  } else if (buttonSequence.includes('+')) {
+
+    return doMath(evaluateSegment(buttonSequence, '+'));
+
+  } else if (buttonSequence.includes('-')) {
+
+    return doMath(evaluateSegment(buttonSequence, '-'));
 
   } else {
+
     return buttonSequence[0];
   }
+}
 
+function evaluateSegment(array, operation) {
+  const index = array.indexOf(operation);
+  switch(operation) {
+    case "-": 
+      var value = array[index-1] - array[index+1];
+      break;
+    case "+":
+      var value = array[index-1] + array[index+1];
+      break;
+    case "x":
+      var value = array[index-1] * array[index+1];
+      break;
+    case "/":
+      var value = array[index-1] / array[index+1];
+      break;
+  }  
+  array.splice(index-1, 3, value);
+  return array;
 }
